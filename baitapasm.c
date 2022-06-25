@@ -2,15 +2,15 @@
 
 int login(char username,int password);
 int withdraw(int tienhientai);
-int transfer(int id,int num2);
-int check(int num3);
+int transfer(int id,int tienhientai);
+int check(int tienhientai);
 int menu ();
 
 int main()
 {
 	char username,c;
 	int password;
-	int i,id,tienrut,tienck,tienhientai=3000000,sodu;
+	int i,id,tienrut,tienck,tienhientai=3000000;
 	printf("Nhap username: ");scanf("%c",&username);
 	printf("Nhap password: ");scanf("%d",&password);
 	if(login(username,password)==1)
@@ -26,9 +26,9 @@ int main()
 		fflush(stdin);
 	    c=getchar();
 		switch(i){
-	    case 1: withdraw(tienhientai); break;
-	    case 2: transfer(id,tienck);break;
-	    case 3: check(sodu);break;
+	    case 1: tienhientai=withdraw(tienhientai); break; 	
+	    case 2: tienhientai=transfer(id,tienhientai);break;
+	    case 3: tienhientai=check(tienhientai);break;
 	    case 4 : thoatctrinh(0); break;}
 	} while  (c =='y' || c=='Y');
 	      printf("\nHay chon theo menu");
@@ -40,27 +40,36 @@ int login(char username,int password)
 }
 int withdraw(int tienhientai)
 {
+	
 	int tienrut;
+	do{
  	printf("So tien ban can rut: ");
  	scanf("%d",&tienrut);
  		if(tienrut%50==0 && tienrut<3000000 && tienrut!=0) {
-		 printf("Ban rut thanh cong");
+		 printf("\nBan rut thanh cong\n");
 		 tienhientai-=tienrut;
-         printf("So tien hien tai la %d",tienhientai);}
-		else printf("Ban khong rut duoc");
+         printf("So tien hien tai la %d\n",tienhientai);
+		break;}
+		else printf("\nSo tien phai chia het cho 50 va nho hon 3 trieu\n");
+	}while(1);
+	return tienhientai;
 }
-int transfer(int id,int num2)
+int transfer(int id,int tienhientai)
 {
     int tknguoinhan=123456;
     int tienck;
     printf("So tien ban muon chuyen toi id nay la: ");scanf("%d",&tienck);
     tknguoinhan+=tienck;
-    printf("So tien nguoi nhan dang co la %d",tknguoinhan);
+    tienhientai-=tienck;
+    printf("So tien nguoi nhan dang co la %d\n",tknguoinhan);
+    printf("So tien hien tai trong tai khoan la %d\n",tienhientai);
+    return (tienhientai);
 }
-int check(int num3)
+int check(int tienhientai)
 {
-	int sodu=3000000;
-	printf("So du trong tai khoan la %d",sodu);
+	
+	printf("So du trong tai khoan la %d\n",tienhientai);
+	return tienhientai;
 }
 int thoatctrinh()
 {
